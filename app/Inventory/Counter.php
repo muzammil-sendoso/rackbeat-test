@@ -17,7 +17,7 @@ class Counter
 	 */
 	public function countTotalQuantity() {
 		// todo return an integer representing the amount of items (quantity) left from the Repository.
-		return 0;
+		return $this->repository->get()->sum( 'quantity' );
 	}
 
 	/**
@@ -27,7 +27,8 @@ class Counter
 	 */
 	public function calculateCostPrice( $quantity = 10 ) {
 		// todo return an double representing the cost price for $quantity.
-		return 0.0;
+		return ( $this->calculateTotalValue() / $this->countTotalQuantity() )
+					 * $quantity;
 	}
 
 	/**
@@ -35,6 +36,8 @@ class Counter
 	 */
 	public function calculateTotalValue() {
 		// todo return an double representing the value of all transactions.
-		return 0.0;
+		return $this->repository->get()->sum( function ( $transaction ) {
+			return $transaction[ 'quantity' ] * $transaction[ 'unit_cost_price' ];
+		});
 	}
 }
