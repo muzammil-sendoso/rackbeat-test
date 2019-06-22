@@ -37,7 +37,7 @@ class Counter
 	public function calculateTotalValue() {
 		// todo return an double representing the value of all transactions.
 		return $this->repository->get()->sum( function ( $transaction ) {
-	    return $transaction[ 'quantity' ] * $transaction[ 'unit_cost_price' ];
+			return $transaction[ 'quantity' ] * $transaction[ 'unit_cost_price' ];
 		});
 	}
 }
